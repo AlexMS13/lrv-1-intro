@@ -1,0 +1,15 @@
+{
+    "name": "alex/001-intro",
+    "description": "Домашнее задание по Composer",
+    "type": "project",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Alex"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require-dev": {
+        "psr/log": "^3.0@dev"
+    }
+}
