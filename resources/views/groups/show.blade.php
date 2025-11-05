@@ -12,6 +12,7 @@
     </ul>
 
     <h3>Студенты группы</h3>
+    <a href="{{ route('groups.students.create', $group) }}">Добавить студента</a>
     @if($group->students->isEmpty())
         <p>Студентов нет</p>
     @else

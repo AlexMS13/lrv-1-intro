@@ -21,7 +21,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        return view('groups.create');
     }
 
     /**
@@ -29,7 +29,22 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'start_from' => 'required|date',
+        'is_active' => 'nullable',
+    ]);
+
+        $validated['is_active'] = $request->has('is_active');
+
+        $group = Group::create($validated);
+
+        if (!$group) {
+            return back()->withErrors('Ошибка при создании группы');
+        }
+
+        return redirect()->route('groups.index')->with('success', 'Группа успешно создана');
+        
     }
 
     /**

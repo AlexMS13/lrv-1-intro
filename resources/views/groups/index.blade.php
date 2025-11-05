@@ -4,6 +4,7 @@
 
 @section('content')
     <h1>Список групп</h1>
+    <a href="{{ route('groups.create') }}">Создать новую группу</a>
 
     @if($groups->isEmpty())
         <p>Групп нет.</p>

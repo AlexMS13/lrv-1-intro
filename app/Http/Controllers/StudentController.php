@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -19,23 +20,30 @@ class StudentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Group $group)
     {
-        //
+        return view('students.create', compact('group'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Group $group)
     {
-        //
+        $validated = $request->validate([
+            'surname' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+        ]);
+
+        $group->students()->create($validated);
+
+        return redirect()->route('groups.show', $group);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Student $student)
+    public function show(Group $group, Student $student)
     {
         $student->load('group'); // Загружаем группу студента для отображения
         return view('students.show', compact('student'));
